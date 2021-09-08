@@ -1,24 +1,31 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.DAOs.NoteDAOImpl;
+import com.example.demo.DAOs.UserDAOImpl;
+import com.example.demo.Entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by edgar.ohanyan on Sep, 2021
  **/
-@RestController("/creation")
+@RestController
+@RequestMapping("/creation")
 public class CreationController {
+    @Autowired
+    NoteDAOImpl noteDAO ;
+    @Autowired
+    UserDAOImpl userDAO;
     @PostMapping("/createUser")
-    public Integer createUser(@Param("username")String username, @Param("password") String password){
-
-        return 1;
+    public User createUser(@RequestParam("username")String username, @RequestParam("password") String password){
+        User user = userDAO.createUser(username,password);
+        return user;
     }
     @PostMapping("/createNote")
-    public Integer createNote(@Param("username")String username, @Param("password") String password){
-
-        return 1;
+    public User createNote(@RequestParam("title")String title,@RequestParam("note")String note,@RequestParam("userId")Long userId){
+        User user =noteDAO.saveNewNote(title,note,userId);
+        return user;
     }
 
 }

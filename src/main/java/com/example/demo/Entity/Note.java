@@ -20,8 +20,10 @@ public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    @Column
+    @Column(length = 50)
     String title;
+    @Column(length = 1000)
+    String note;
     @Column
     Date createTime;
     @Column
