@@ -3,8 +3,6 @@ package com.example.demo.DAOs;
 import com.example.demo.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.persistence.Access;
 import java.util.Date;
 
 /**
@@ -24,4 +22,5 @@ public class UserDAOImpl {
         userDAO.save(u);
         return u;
     }
+
 }
