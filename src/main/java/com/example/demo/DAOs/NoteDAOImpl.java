@@ -20,6 +20,14 @@ public class NoteDAOImpl {
     @Autowired
     UserDAO userDAO;
 
+    public Note editeNote(Long id, String title,String note){
+        Note optionalNote = noteDAO.findById(id).get();
+        optionalNote.setTitle(title);
+        optionalNote.setNote(optionalNote.getNote().concat(note));
+        optionalNote.setLastUpdateTime(new Date());
+        noteDAO.save(optionalNote);
+        return optionalNote;
+    }
     public User saveNewNote(String title,String note,Long userId){
         User user =userDAO.findById(userId).get() ;
         List<Note> noteList = user.getNoteList();
